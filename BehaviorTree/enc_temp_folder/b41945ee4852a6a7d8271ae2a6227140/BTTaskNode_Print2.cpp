@@ -6,7 +6,7 @@
 EBTNodeResult::Type UBTTaskNode_Print2::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	TestVar += 1;
-	UE_LOG(LogTemp, Warning, TEXT("Print2 : %d."), TestVar);
+	UE_LOG(LogTemp, Warning, TEXT("Print Task2 : %d."), TestVar);
 
 	return EBTNodeResult::Failed;
 }
