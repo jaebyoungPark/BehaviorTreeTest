@@ -22,7 +22,7 @@ void UBTTaskNode_WaitAndFail::TickTask(UBehaviorTreeComponent& OwnerComp, uint8*
 
 	if (ElapsedTime >= WaitTime)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("ElapsedTime : %.2f"), ElapsedTime);
+	/*	UE_LOG(LogTemp, Warning, TEXT("ElapsedTime : %.2f"), ElapsedTime);*/
 		FinishLatentTask(OwnerComp, ReturnType);
 	}
 }

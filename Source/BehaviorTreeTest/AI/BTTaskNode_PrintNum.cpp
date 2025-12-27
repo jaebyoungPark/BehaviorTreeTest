@@ -6,6 +6,11 @@
 UBTTaskNode_PrintNum::UBTTaskNode_PrintNum()
 {
 	NodeName = TEXT("Print ");
+
+	bNotifyTick = true;
+	ElapsedTime = 0.0f;
+	WaitTime = 2.f;
+
 }
 
 EBTNodeResult::Type UBTTaskNode_PrintNum::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
@@ -13,6 +18,17 @@ EBTNodeResult::Type UBTTaskNode_PrintNum::ExecuteTask(UBehaviorTreeComponent& Ow
 	TestVar += 1;
 	UE_LOG(LogTemp, Warning, TEXT("Print%d : %d."), NumToSet, TestVar);
 
-	return ReturnType;
+	ElapsedTime = 0.0f;
+	return EBTNodeResult::InProgress;
+}
 
+void UBTTaskNode_PrintNum::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
+{
+	ElapsedTime += DeltaSeconds;
+
+	if (ElapsedTime >= WaitTime)
+	{
+		/*	UE_LOG(LogTemp, Warning, TEXT("ElapsedTime : %.2f"), ElapsedTime);*/
+		FinishLatentTask(OwnerComp, ReturnType);
+	}
 }
