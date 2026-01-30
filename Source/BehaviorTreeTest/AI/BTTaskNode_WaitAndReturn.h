@@ -4,18 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTTaskNode.h"
-#include "BTTaskNode_WaitAndFail.generated.h"
+#include "BTTaskNode_WaitAndReturn.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class BEHAVIORTREETEST_API UBTTaskNode_WaitAndFail : public UBTTaskNode
+class BEHAVIORTREETEST_API UBTTaskNode_WaitAndReturn : public UBTTaskNode
 {
 	GENERATED_BODY()
 	
 public:
-	UBTTaskNode_WaitAndFail();
+	UBTTaskNode_WaitAndReturn();
 
 protected:
 
@@ -26,7 +26,7 @@ protected:
 	float ElapsedTime;
 
 	UPROPERTY(EditAnywhere)
-	float WaitTime;
+	float WaitTime = 2.f;
 
 	UPROPERTY(EditAnywhere)
 	TEnumAsByte<EBTNodeResult::Type> ReturnType = EBTNodeResult::Failed;
