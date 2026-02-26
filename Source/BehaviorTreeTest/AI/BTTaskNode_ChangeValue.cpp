@@ -13,15 +13,24 @@ UBTTaskNode_ChangeValue::UBTTaskNode_ChangeValue()
 
 EBTNodeResult::Type UBTTaskNode_ChangeValue::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
+    TArray<AActor*> Found;
 
-	TArray<AActor*> Found;
-	UGameplayStatics::GetAllActorsOfClass(
-		GetWorld(),
-		TargetActorClass,
-		Found
-	);
+    UGameplayStatics::GetAllActorsOfClass(
+        GetWorld(),
+        TargetActorClass,
+        Found
+    );
 
-	OwnerComp.GetBlackboardComponent()->SetValueAsObject(TEXT("TargetActor"), Found[0]);
+    UBlackboardComponent* BBComp = OwnerComp.GetBlackboardComponent();
 
-	return ReturnType;
+    if (Found.Num() > 0)
+    {
+        BBComp->SetValueAsObject(TEXT("TargetActor"), Found[0]);
+    }
+    else
+    {
+        BBComp->SetValueAsObject(TEXT("TargetActor"), nullptr);
+    }
+
+    return ReturnType;
 }
